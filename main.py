@@ -40,7 +40,7 @@ def run_flask():
 # ------------------------------
 # Run both Discord bot and Flask
 # ------------------------------
-
+print(DISCORD_TOKEN)
 if __name__ == "__main__":
     # Start Flask in a background thread
     threading.Thread(target=run_flask, daemon=True).start()
