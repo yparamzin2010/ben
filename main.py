@@ -17,7 +17,7 @@ if not DISCORD_TOKEN:
 # Create bot instance
 intents = discord.Intents.default()
 intents.message_content = True  # Required to read message content
-bot = commands.Bot(command_prefix="daddy pls ", intents=intents)
+bot = commands.Bot(command_prefix="67", intents=intents)
 
 # Define weighted response options
 # Format: (response, weight)
