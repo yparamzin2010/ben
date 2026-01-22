@@ -31,7 +31,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Bot is alive!"
+    return "Bot is FREAKY!"
 
 def run_flask():
     # Run on the port Render assigns (or 10000 as default)
@@ -46,4 +46,4 @@ if __name__ == "__main__":
     # Start Flask in a background thread
     threading.Thread(target=run_flask, daemon=True).start()
     # Start Discord bot (blocking call)
-    bot.run("MTQ2Mzk1OTk5MDM4MDI2NTU1Mg.GHjV_Y.EbbHtrLYmaiRdQljGqrKMtvJ0yXg8-6R-xShkQ")
+    bot.run(DISCORD_TOKEN)
