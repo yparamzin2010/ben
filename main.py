@@ -10,6 +10,7 @@ import os
 
 # Use your bot token as an environment variable for safety
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+DISCORD_TOKEN = DISCORD_TOKEN.strip()
 if not DISCORD_TOKEN:
     raise ValueError("Please set the DISCORD_TOKEN environment variable!")
 
