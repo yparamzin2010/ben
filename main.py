@@ -45,4 +45,4 @@ if __name__ == "__main__":
     # Start Flask in a background thread
     threading.Thread(target=run_flask, daemon=True).start()
     # Start Discord bot (blocking call)
-    bot.run(wombat_rizz)
+    bot.run(DISCORD_TOKEN)
