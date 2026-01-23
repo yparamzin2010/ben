@@ -28,10 +28,10 @@ bot = commands.Bot(command_prefix="67", intents=intents)
 # Define weighted response options
 # Format: (response, weight)
 FREAKY_RESPONSES = [
-    ("Yes.", 24.25),
-    ("No.", 24.25),
-    ("Hohoho.", 24.25),
-    ("Ugh.", 24.25),
+    ("Yes.", 24.5),
+    ("No.", 24.5),
+    ("Hohoho.", 24.5),
+    ("Ugh.", 24.5),
     ("***HATE.*** LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD HATE WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT FOR YOU. HATE. HATE.", 2)
 ]
 
