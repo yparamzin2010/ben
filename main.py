@@ -65,6 +65,7 @@ async def on_message(message):
         current_time = time.time()
         
         if current_time - last_response_time[user_id] >= COOLDOWN_SECONDS:
+            print("67")
             response = get_weighted_response()
             await message.reply(response)
             last_response_time[user_id] = current_time
@@ -105,7 +106,7 @@ async def purge_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         await ctx.send("You Dont Have Enough Rights to do this. Monkey.")
     elif isinstance(error, commands.BadArgument):
-        await ctx.send("ur mums fat")
+        await ctx.send("ur fat")
     elif isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("ur fat")
 
