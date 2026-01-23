@@ -4,6 +4,12 @@ from flask import Flask
 import threading
 import os
 import random
+import time
+from collections import defaultdict
+
+# Add cooldown tracking (user_id -> last_response_time)
+last_response_time = defaultdict(float)
+COOLDOWN_SECONDS = 3
 
 # ------------------------------
 # Discord Bot Setup
@@ -53,11 +59,15 @@ async def on_message(message):
         if freaky_role:
             should_respond = True
     
-    # Send response if either condition is met
-    if should_respond:
-        response = get_weighted_response()
-        await message.reply(response)
-    
+  if should_respond:
+        # Check cooldown
+        user_id = message.author.id
+        current_time = time.time()
+        
+        if current_time - last_response_time[user_id] >= COOLDOWN_SECONDS:
+            response = get_weighted_response()
+            await message.reply(response)
+            last_response_time[user_id] = current_time
     # Process commands (important to keep this)
     await bot.process_commands(message)
 
