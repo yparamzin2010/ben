@@ -59,7 +59,7 @@ async def on_message(message):
         if freaky_role:
             should_respond = True
     
-  if should_respond:
+    if should_respond:
         # Check cooldown
         user_id = message.author.id
         current_time = time.time()
