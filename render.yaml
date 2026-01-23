@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ben
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    numInstances: 1  # CRITICAL: Only run 1 instance
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
