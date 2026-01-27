@@ -9,8 +9,32 @@ from collections import defaultdict
 
 # Add cooldown tracking (user_id -> last_response_time)
 last_response_time = defaultdict(float)
-COOLDOWN_SECONDS = 3
+# Increase cooldown significantly
+COOLDOWN_SECONDS = 1  # Changed from 3 to 10
 
+# Add a global rate limiter
+import asyncio
+from collections import deque
+
+message_queue = deque()
+RATE_LIMIT_PER_MINUTE = 30  # Max 30 responses per minute
+
+async def rate_limited_reply(message, response):
+    """Queue messages to avoid rate limits"""
+    current_time = time.time()
+    
+    # Remove old entries (older than 60 seconds)
+    while message_queue and current_time - message_queue[0] > 60:
+        message_queue.popleft()
+    
+    # Check if we've hit the limit
+    if len(message_queue) >= RATE_LIMIT_PER_MINUTE:
+        print(f"Rate limit reached, skipping response to {message.author}")
+        return
+    
+    # Send the message and track it
+    await message.reply(response)
+    message_queue.append(current_time)
 # ------------------------------
 # Discord Bot Setup
 # ------------------------------
@@ -58,17 +82,15 @@ async def on_message(message):
         freaky_role = discord.utils.get(message.author.roles, name="Freaky")
         if freaky_role:
             should_respond = True
+
     
     if should_respond:
-        # Check cooldown
-        user_id = message.author.id
-        current_time = time.time()
-        
-        if current_time - last_response_time[user_id] >= COOLDOWN_SECONDS:
-            print("67")
-            response = get_weighted_response()
-            await message.reply(response)
-            last_response_time[user_id] = current_time
+      user_id = message.author.id
+      current_time = time.time()
+      if current_time - last_response_time[user_id] >= COOLDOWN_SECONDS:
+        response = get_weighted_response()
+        await rate_limited_reply(message, response)  # Use rate-limited function
+        last_response_time[user_id] = current_time
     # Process commands (important to keep this)
     await bot.process_commands(message)
 
